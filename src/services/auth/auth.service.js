@@ -1,12 +1,26 @@
 import axios from 'axios';
 
-class AuthService {
-    login = (data) => {
-        return axios.post("http://localhost:5000/api/users/login", data);
-    }
+
+const login = (data) => {
+    return axios.post("http://localhost:5000/api/user/login", data);
 }
 
-export default new AuthService();
+const getCurrentUser = () => {
+    return JSON.parse(localStorage.getItem("user"));
+};
+
+const logout = () => {
+    localStorage.removeItem("user");
+};
+
+const AuthService = {
+    login,
+    getCurrentUser,
+    logout
+}
+export default AuthService;
+
+//export default new AuthService();
 
 
 

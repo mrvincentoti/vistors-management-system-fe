@@ -14,15 +14,15 @@ const Login = (props) => {
   };
   const [formData, updateFormData] = React.useState(initialFormData);
 
-  const handleChange = (e) => {
+  const handleChangeLogin = (e) => {
     updateFormData({
       ...formData,
 
       [e.target.type]: e.target.value
-    });
+    });console.log(formData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmitLogin = (e) => {
     e.preventDefault()
     //console.log(formData);
     authService.login(formData).then(response => {
@@ -39,6 +39,8 @@ const Login = (props) => {
       });
   }
 
+
+
   return (
     <div className='row'>
       <div className='col-md-4 offset-md-4 mt-5'>
@@ -50,16 +52,16 @@ const Login = (props) => {
               alt="Layer3" />
             <h1 className='mb-3 fs-3 fw-normal'>Welcome!</h1>
             <Form.Group controlId='sign-in-email-address'>
-              <Form.Control onChange={handleChange} type='email' size='lg' placeholder='Email address' autoComplete='username' className='positon-relative mb-2' />
+              <Form.Control onChange={handleChangeLogin} type='email' size='lg' placeholder='Email address' autoComplete='username' className='positon-relative mb-2' />
             </Form.Group>
             <Form.Group controlId='sign-in-password' className='mb-3'>
-              <Form.Control onChange={handleChange} type='password' size='lg' placeholder='Password' autoComplete='current-password' className='positon-relative' />
+              <Form.Control onChange={handleChangeLogin} type='password' size='lg' placeholder='Password' autoComplete='current-password' className='positon-relative' />
             </Form.Group>
             <Form.Group controlId='remember-me' className='d-flex justify-content-center mb-4'>
               <Form.Check label='Remember me' />
             </Form.Group>
             <div className='d-grid'>
-              <Button onClick={handleSubmit} variant='danger' size='lg'>login</Button>
+              <Button onClick={handleSubmitLogin} variant='danger' size='lg'>login</Button>
             </div>
           </Form>
         </div>

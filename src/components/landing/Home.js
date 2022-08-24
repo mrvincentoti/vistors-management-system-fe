@@ -9,20 +9,20 @@ export default function Home() {
         address: "",
         user_id: "",
         purpose_id: ""
-      };
-      const [formData, updateFormData] = React.useState(initialFormData);
-    
-      const handleChangeAddVisitor = (e) => {
-        const {name, value} = e.target;
-        updateFormData({...formData, [name]: value});
+    };
+    const [formData, updateFormData] = React.useState(initialFormData);
+
+    const handleChangeAddVisitor = (e) => {
+        const { name, value } = e.target;
+        updateFormData({ ...formData, [name]: value });
         console.log(formData);
-      };
-    
-      const handleSubmitAddVisitor = (e) => {
+    };
+
+    const handleSubmitAddVisitor = (e) => {
         e.preventDefault()
         console.log(formData);
         window.location.reload();
-      }
+    }
 
 
     return (
@@ -86,62 +86,58 @@ export default function Home() {
                                 <button type="button" className="btn btn-danger"><i className="fas fa-trash-alt"></i> Delete</button>
                             </div>
                             <div className='col-md-6 col-sm-12 col-xs-12 text-right mb-3'>
-<<<<<<< HEAD
-                                <button type="button" className="btn btn-primary"><i className="fas fa-plus"></i> Add Visitor</button>
-=======
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Add Visitor</button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div className="modal-content">
-                                        <div className="modal-header">
-                                            <h5 className="modal-title" id="exampleModalLabel">Fill in your details</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div className="modal-body">
-                                        <form>
-                                            <div className="form-group">
-                                                <label for="fullname"></label>
-                                                <input onChange={handleChangeAddVisitor} name="fullname" className="form-control" id="fullname"  placeholder='FullName' />
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="exampleModalLabel">Fill in your details</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="address"></label>
-                                                <input onChange={handleChangeAddVisitor} name="address" className="form-control" id="address" placeholder='Address'/>
+                                            <div className="modal-body">
+                                                <form>
+                                                    <div className="form-group">
+                                                        <label for="fullname"></label>
+                                                        <input onChange={handleChangeAddVisitor} name="fullname" className="form-control" id="fullname" placeholder='FullName' />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="address"></label>
+                                                        <input onChange={handleChangeAddVisitor} name="address" className="form-control" id="address" placeholder='Address' />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="user-id"></label>
+                                                        <select onChange={handleChangeAddVisitor} class="form-control" id="user-id" name="user_id">
+                                                            <option selected>Whom to See</option>
+                                                            <option value='1'>Official</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="purpose-id"></label>
+                                                        <select onChange={handleChangeAddVisitor} class="form-control" id="purpose-id" name="purpose_id">
+                                                            <option selected>Purpose of visit</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                        </select>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            
-                                            <div class="form-group">
-                                                <label for="user-id"></label>
-                                                <select onChange={handleChangeAddVisitor} class="form-control" id="user-id" name="user_id">
-                                                    <option selected>Whom to See</option>
-                                                    <option value='1'>Official</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                         </div>
-                                            <div class="form-group">
-                                                <label for="purpose-id"></label>
-                                                <select onChange={handleChangeAddVisitor} class="form-control" id="purpose-id" name="purpose_id">
-                                                    <option selected>Purpose of visit</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                         </div>
-                                    </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button onClick={handleSubmitAddVisitor} type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button onClick={handleSubmitAddVisitor} type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
->>>>>>> a4af1d473891f2d00d376dd1275a43f9ecbf9b55
                             </div>
                             <div className='col-md-6 mb-3'>
                                 <div className="input-group mb-3">

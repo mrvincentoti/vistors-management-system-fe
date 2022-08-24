@@ -42,7 +42,7 @@ const Login = (props) => {
   return (
     <div className='row'>
       <div className='col-md-4 offset-md-4 mt-5'>
-        <div className='card' style={{ padding: "50px" }}>
+        <div className='card' style={{ padding: "50px", boxShadow: "0 0 15px 0 lightblue" }}>
           <Form id='sign-in-form' className='text-center'>
             <img
               className='mb-4 layer3-logo'

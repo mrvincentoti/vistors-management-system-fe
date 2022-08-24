@@ -7,14 +7,14 @@ export default function Home() {
         <div>
             <div className='row mt-5'>
                 <div className='col-md-10 offset-md-1'>
-                    <div class="card p-3 mb-3 bg-white rounded" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
+                    <div className="card p-3 mb-3 bg-white rounded" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
                         <h4 className='mb-4'>Statistics</h4>
                         <div className="row">
                             <div className='col-md-4'>
                                 <div className="card text-white bg-primary mb-3">
                                     <div className="card-body d-flex flex-row">
                                         <div className="col-md-6" style={{ verticalAlign: "center" }}>
-                                            <i class="fas fa-users" style={{ fontSize: "30px" }}></i>
+                                            <i className="fas fa-users" style={{ fontSize: "30px" }}></i>
                                         </div>
                                         <div className="col-md-6 text-right">
                                             <h3>20</h3>
@@ -27,7 +27,7 @@ export default function Home() {
                                 <div className="card text-white bg-warning mb-3">
                                     <div className="card-body d-flex flex-row">
                                         <div className="col-md-6" style={{ verticalAlign: "center" }}>
-                                            <i class="fas fa-sign-in-alt" style={{ fontSize: "30px" }}></i>
+                                            <i className="fas fa-sign-in-alt" style={{ fontSize: "30px" }}></i>
                                         </div>
                                         <div className="col-md-6 text-right">
                                             <h3>20</h3>
@@ -40,7 +40,7 @@ export default function Home() {
                                 <div className="card text-white bg-danger mb-3">
                                     <div className="card-body d-flex flex-row">
                                         <div className="col-md-6" style={{ verticalAlign: "center" }}>
-                                            <i class="fas fa-truck" style={{ fontSize: "30px" }}></i>
+                                            <i className="fas fa-truck" style={{ fontSize: "30px" }}></i>
                                         </div>
                                         <div className="col-md-6 text-right">
                                             <h3>20</h3>
@@ -55,36 +55,36 @@ export default function Home() {
             </div>
             <div className='row'>
                 <div className='col-md-10 offset-md-1'>
-                    <div class="card shadow-lg p-3 bg-white rounded" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
+                    <div className="card shadow-lg p-3 bg-white rounded" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
                         <h4 className='mb-4'>Visitors List</h4>
                         <div className='row'>
                             <div className='col-md-6 col-sm-12 col-xs-12 mb-3'>
-                                <button type="button" class="btn btn-success" style={{ marginRight: "2px" }}><i class="fas fa-sign-in-alt"></i> Sign In</button>
-                                <button type="button" class="btn btn-primary" style={{ marginRight: "2px" }}><i class="fas fa-sign-out-alt"></i>Sign Out</button>
-                                <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                                <button type="button" className="btn btn-success" style={{ marginRight: "2px" }}><i className="fas fa-sign-in-alt"></i> Sign In</button>
+                                <button type="button" className="btn btn-primary" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt"></i>Sign Out</button>
+                                <button type="button" className="btn btn-danger"><i className="fas fa-trash-alt"></i> Delete</button>
                             </div>
                             <div className='col-md-6 col-sm-12 col-xs-12 text-right mb-3'>
-                                <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Add Visitor</button>
+                                <button type="button" className="btn btn-primary"><i className="fas fa-plus"></i> Add Visitor</button>
                             </div>
                             <div className='col-md-6 mb-3'>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar"></i></span>
+                                <div className="input-group mb-3">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text" id="basic-addon1"><i className="fas fa-calendar"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="15 Aug 2022 - 20 Sept 2022" aria-label="Username" aria-describedby="basic-addon1" />
+                                    <input type="text" className="form-control" placeholder="15 Aug 2022 - 20 Sept 2022" aria-label="Username" aria-describedby="basic-addon1" />
                                 </div>
                             </div>
                             <div className='col-md-6 mb-3'>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                                <div className="input-group mb-3">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text" id="basic-addon1"><i className="fas fa-search"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
+                                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
                                 </div>
                             </div>
                             <div className='col-md-12 mt-3'>
                                 <div className='table-responsive'>
-                                    <table class="table table-striped">
+                                    <table className="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>

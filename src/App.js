@@ -4,6 +4,7 @@ import Login from './components/auth/Login';
 import Home from './components/landing/Home';
 import AuthService from "./services/auth/auth.service";
 import { useNavigate } from "react-router-dom";
+import Profile from "./components/landing/Profile";
 /*import "bootstrap/dist/css/bootstrap.min.css";*/
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
     const user = AuthService.getCurrentUser();
     if (user) {
       setCurrentUser(user);
+      console.log(currentUser);
     }
 
     return () => {
@@ -52,7 +54,7 @@ const App = () => {
                     Account
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a className="dropdown-item" href="#">Profile</a>
+                    <a className="dropdown-item" href="/Profile">Profile</a>
                     <a className="dropdown-item" href="#">Sign Out</a>
                   </div>
                 </li>
@@ -71,6 +73,7 @@ const App = () => {
           <Route exact path={"/"} element={<Login />} />
           <Route exact path={"/home"} element={<Home />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/profile" element={<Profile />} />
         </Routes>
       </div>
       {/* <Login /> */}

@@ -13,6 +13,10 @@ const logout = () => {
     localStorage.removeItem("user");
 };
 
+const addVisitor = (data) => {
+    return axios.post("http://localhost:5000/api/visitor/createVisitors", data);
+}
+
 const AuthService = {
     login,
     getCurrentUser,

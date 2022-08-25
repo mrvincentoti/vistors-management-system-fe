@@ -1,8 +1,10 @@
 import React from 'react'
-import AuthService from "../../services/auth/auth.service";
+import authService from "../../services/auth/auth.service";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-    const currentUser = AuthService.getCurrentUser();
+    const currentUser = authService.getCurrentUser();
+    const navigate = useNavigate();
 
     const initialFormData = {
         fullname: "",
@@ -20,8 +22,18 @@ export default function Home() {
 
     const handleSubmitAddVisitor = (e) => {
         e.preventDefault()
-        console.log(formData);
-        window.location.reload();
+        authService.addVisitor(formData).then(response => {
+            if (response.data) {
+              localStorage.setItem("user", JSON.stringify(response.data));
+              navigate("/home");
+              window.location.reload();
+            } else {
+              console.log(response);
+            }
+          })
+            .catch(err => {
+      
+            });
     }
 
 

@@ -13,9 +13,15 @@ const getCurrentUser = () => {
 const logout = () => {
     localStorage.removeItem("user");
 };
+const getToken = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user.token;
+
+}
 
 const addVisitor = (data) => {
-    const config = { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjEwLCJ1c2VybmFtZSI6ImFsYWJhIiwiZW1haWwiOiJhbGFiYUBnbWFpbC5jb20iLCJmaXJzdF9uYW1lIjoiZGF2aWQiLCJsYXN0X25hbWUiOiJEYXZpZCIsInBob25lX251bWJlciI6IjA4NDE0NTQ1NDUiLCJnZW5kZXJfaWQiOjEsImRlcGFydG1lbnRfaWQiOjF9LCJpYXQiOjE2NjEzNjA2MTAsImV4cCI6MTY2MTM2NDIxMH0.3_MQm0yeOEqrPjO0feCmY-x0VpfOIdt1tm1ZD2TjfhQ` } }
+    const token = getToken();
+    const config = { headers: { Authorization: `Bearer ${token}` } }
     return axios.post("http://localhost:5000/api/visitor/createVisitors", data, config);
 }
 

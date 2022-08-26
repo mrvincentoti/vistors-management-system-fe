@@ -19,6 +19,12 @@ export default function Home() {
     };
     const [formData, updateFormData] = React.useState(initialFormData);
 
+		useEffect(() => {
+        retrieveAllUsers();
+				retrieveAllPurpose();
+				retrieveAllVisitors();
+		}, []);
+
     const handleChangeAddVisitor = (e) => {
         const { name, value } = e.target;
         updateFormData({ ...formData, [name]: value });
@@ -28,7 +34,6 @@ export default function Home() {
         e.preventDefault()
         authService.addVisitor(formData).then(response => {
             if (response.data) {
-                localStorage.setItem("user", JSON.stringify(response.data));
                 navigate("/home");
                 window.location.reload();
             } else {
@@ -40,37 +45,37 @@ export default function Home() {
             });
     }
 
-    useEffect(() => {
-        authService.getAllUsers()
-        .then(res => { 
-            setAllUsers(res.data.data)
-        })
-        .catch(err => {
-            console.log(err);
-        })
-	}, []);
+    
 
-    useEffect(() => {
-        
-        authService.getVisitorPurpose()
-        .then(res => { 
-            setVisitorPurpose(res.data.data)
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }, []);
+	 const retrieveAllUsers = () =>{
+		authService.getAllUsers()
+		.then(res => { 
+				setAllUsers(res.data.data)
+		})
+		.catch(err => {
+				console.log(err);
+		})
+	 }
 
-    useEffect(() => {
+	 const retrieveAllPurpose = () => {
+			authService.getVisitorPurpose()
+			.then(res => { 
+					setVisitorPurpose(res.data.data)
+			})
+			.catch(err => {
+					console.log(err);
+			})
+	 }
+
+		const retrieveAllVisitors = () =>{
 			visitorService.getAllVisitors()
 			.then(res => {
-				console.log(res.data);
 				setAllVisitors(res.data.data);
 			})
 			.catch(err => {
 				console.log(err);
 			})
-    }, []);
+		}
       
     return (
         <div>
@@ -127,13 +132,12 @@ export default function Home() {
                     <div className="card shadow-lg p-3 bg-white rounded" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
                         <h4 className='mb-4'>Visitors List</h4>
                         <div className='row'>
-                            <div className='col-md-6 col-sm-12 col-xs-12 mb-3'>
+                            {/*<div className='col-md-6 col-sm-12 col-xs-12 mb-3'>
                                 <button type="button" className="btn btn-success" style={{ marginRight: "2px" }}><i className="fas fa-sign-in-alt"></i> Sign In</button>
                                 <button type="button" className="btn btn-primary" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt"></i>Sign Out</button>
                                 <button type="button" className="btn btn-danger"><i className="fas fa-trash-alt"></i> Delete</button>
-                            </div>
-                            <div className='col-md-6 col-sm-12 col-xs-12 text-right mb-3'>
-                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i className="fas fa-plus"></i> Add Visitor</button>
+                            </div>*/}
+                            <div className='col-md-12 col-sm-12 col-xs-12 text-right mb-3'>
                                 <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog" role="document">
                                         <div className="modal-content">
@@ -182,14 +186,14 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='col-md-6 mb-3'>
+                            {/*<div className='col-md-6 mb-3'>
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text" id="basic-addon1"><i className="fas fa-calendar"></i></span>
                                     </div>
                                     <input type="text" className="form-control" placeholder="15 Aug 2022 - 20 Sept 2022" aria-label="Username" aria-describedby="basic-addon1" />
                                 </div>
-                            </div>
+                            </div>*/}
                             <div className='col-md-6 mb-3'>
                                 <div className="input-group mb-3">
                                     <div className="input-group-prepend">
@@ -198,6 +202,9 @@ export default function Home() {
                                     <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
                                 </div>
                             </div>
+														<div className='col-md-6 mb-3 text-right'>
+														<button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i className="fas fa-plus"></i> Add Visitor</button>
+														</div>
                             <div className='col-md-12 mt-3'>
                                 <div className='table-responsive'>
                                     <table className="table table-striped">
@@ -205,9 +212,9 @@ export default function Home() {
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Fullname</th>
-                                                <th scope="col">Company</th>
-                                                <th scope="col">Added By</th>
-                                                <th scope="col">Date</th>
+                                                {/*<th scope="col">Company</th>*/}
+                                                <th scope="col">Whom to see</th>
+                                                {/*<th scope="col">Date</th>*/}
                                                 <th scope="col">Time In</th>
                                                 <th scope="col">Time Out</th>
                                                 <th scope="col"></th>
@@ -218,13 +225,13 @@ export default function Home() {
 																						allvisitors.map((visitor,i) => (
 																							<tr><th scope="row">{i + 1}</th>
                                                 <td>{visitor.fullname}</td>
-                                                <td>{visitor.address}</td>
-                                                <td>{visitor.user_id}</td>
-                                                <td>{visitor.date_added}</td>
-                                                <td>{visitor.date_added}</td>
-                                                <td>{visitor.date_added}</td>
-                                                <td>
-																									action
+                                                {/*<td>{visitor.address}</td>*/}
+                                                <td>{visitor.first_name + " " + visitor.last_name}</td>
+                                                {/*<td>{visitor.date_added}</td>*/}
+                                                <td>{visitor.time_in}</td>
+                                                <td>{visitor.time_out}</td>
+                                                <td className='text-right'>
+																									<a type="button" className="btn btn-warning text-white" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt">Sign Out</i></a>
 																								</td>
                                             </tr>
 																						)

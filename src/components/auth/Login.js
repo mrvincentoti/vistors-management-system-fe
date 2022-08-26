@@ -19,12 +19,11 @@ const Login = (props) => {
       ...formData,
 
       [e.target.type]: e.target.value
-    });console.log(formData);
+    });
   };
 
   const handleSubmitLogin = (e) => {
     e.preventDefault()
-    //console.log(formData);
     authService.login(formData).then(response => {
       if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));

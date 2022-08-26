@@ -17,6 +17,7 @@ export default function Home() {
         user_id: "",
         purpose_id: ""
     };
+		
     const [formData, updateFormData] = React.useState(initialFormData);
 
 		useEffect(() => {

@@ -28,6 +28,7 @@ const addVisitor = (data) => {
     return axios.post("http://localhost:5000/api/visitor/createVisitors", data, config);
 }
 
+
 const AuthService = {
     login,
     getCurrentUser,

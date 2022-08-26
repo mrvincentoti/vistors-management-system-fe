@@ -13,7 +13,8 @@ const allVisitors = () => {
 }
 
 const  VisitorsService = {
-    allVisitors
+    allVisitors,
+    getAllVisitors
 }
 
 export default VisitorsService;

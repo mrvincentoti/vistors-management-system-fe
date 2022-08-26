@@ -5,7 +5,7 @@ import Home from './components/landing/Home';
 import AuthService from "./services/auth/auth.service";
 import { useNavigate } from "react-router-dom";
 import Profile from "./components/landing/Profile";
-import visitors from "./components/landing/visitors"
+import Visitors from "./components/landing/visitors"
 /*import "bootstrap/dist/css/bootstrap.min.css";*/
 
 const App = () => {
@@ -44,7 +44,7 @@ const App = () => {
                   <a className="nav-link" href="/home">Home <span className="sr-only">(current)</span></a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/visitors">Visitors</a>
+                  <a className="nav-link" href="/Visitors">Visitors</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">Staff</a>
@@ -74,7 +74,8 @@ const App = () => {
           <Route exact path={"/home"} element={<Home />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/visitors" element={<visitors />} />
+          <Route exact path="/visitors" element={<Visitors />} />
+
         </Routes>
       </div>
       {/* <Login /> */}

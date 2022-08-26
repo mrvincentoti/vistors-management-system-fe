@@ -1,9 +1,14 @@
 import React from 'react'
 import authService from "../../services/auth/auth.service";
+import visitorService from "../../services/visitors/visitors.service";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function Home() {
     const currentUser = authService.getCurrentUser();
+    const [allusers, setAllUsers] = useState([]);
+    const [allvisitors, setAllVisitors] = useState([]);
+    const [purpose, setVisitorPurpose] = useState([]);
     const navigate = useNavigate();
 
     const initialFormData = {
@@ -17,7 +22,6 @@ export default function Home() {
     const handleChangeAddVisitor = (e) => {
         const { name, value } = e.target;
         updateFormData({ ...formData, [name]: value });
-        console.log(formData);
     };
 
     const handleSubmitAddVisitor = (e) => {
@@ -36,7 +40,38 @@ export default function Home() {
             });
     }
 
+    useEffect(() => {
+        authService.getAllUsers()
+        .then(res => { 
+            setAllUsers(res.data.data)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+	}, []);
 
+    useEffect(() => {
+        
+        authService.getVisitorPurpose()
+        .then(res => { 
+            setVisitorPurpose(res.data.data)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, []);
+
+    useEffect(() => {
+			visitorService.getAllVisitors()
+			.then(res => {
+				console.log(res.data);
+				setAllVisitors(res.data.data);
+			})
+			.catch(err => {
+				console.log(err);
+			})
+    }, []);
+      
     return (
         <div>
             <div className='row mt-5'>
@@ -122,23 +157,19 @@ export default function Home() {
                                                     <div className="form-group">
                                                         <label></label>
                                                         <select onChange={handleChangeAddVisitor} className="form-control" id="user-id" name="user_id">
-                                                            <option>Whom to See</option>
-                                                            <option value='1'>Official</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
+																														<option>whom to visit</option>
+                                                            {allusers.map(user => (
+																															<option value={user.id} key={user.id}>{user.first_name+ " " + user.last_name}</option>
+																														))}
                                                         </select>
                                                     </div>
                                                     <div className="form-group">
                                                         <label></label>
                                                         <select onChange={handleChangeAddVisitor} className="form-control" id="purpose-id" name="purpose_id">
                                                             <option>Purpose of visit</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
+                                                            {purpose.map(pur => (
+                                                                <option value={pur.id} key={pur.id}>{pur.purpose}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                 </form>
@@ -183,16 +214,22 @@ export default function Home() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
+																					{
+																						allvisitors.map((visitor,i) => (
+																							<tr><th scope="row">{i + 1}</th>
+                                                <td>{visitor.fullname}</td>
+                                                <td>{visitor.address}</td>
+                                                <td>{visitor.user_id}</td>
+                                                <td>{visitor.date_added}</td>
+                                                <td>{visitor.date_added}</td>
+                                                <td>{visitor.date_added}</td>
+                                                <td>
+																									action
+																								</td>
                                             </tr>
+																						)
+																						)
+																					}
                                         </tbody>
                                     </table>
                                 </div>

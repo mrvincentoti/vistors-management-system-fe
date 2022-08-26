@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-
+import Util from '../../util/common';
 
 const login = (data) => {
     return axios.post("http://localhost:5000/api/user/login", data);
@@ -10,17 +10,20 @@ const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));
 };
 
+const getAllUsers = () => {
+    return axios.get("http://localhost:5000/api/user/getUsers");
+}
+
+const getVisitorPurpose = () => {
+    return axios.get("http://localhost:5000/api/visitor/getVisitorPurpose")
+}
+
 const logout = () => {
     localStorage.removeItem("user");
 };
-const getToken = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user.token;
-
-}
 
 const addVisitor = (data) => {
-    const token = getToken();
+    const token = Util.getToken();
     const config = { headers: { Authorization: `Bearer ${token}` } }
     return axios.post("http://localhost:5000/api/visitor/createVisitors", data, config);
 }
@@ -29,7 +32,9 @@ const AuthService = {
     login,
     getCurrentUser,
     logout,
-    addVisitor
+    addVisitor,
+    getAllUsers,
+    getVisitorPurpose
 }
 export default AuthService;
 

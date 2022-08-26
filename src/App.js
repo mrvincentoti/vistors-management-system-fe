@@ -16,7 +16,6 @@ const App = () => {
     const user = AuthService.getCurrentUser();
     if (user) {
       setCurrentUser(user);
-      console.log(currentUser);
     }
 
     return () => {

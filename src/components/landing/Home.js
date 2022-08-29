@@ -9,8 +9,8 @@ export default function Home() {
     const [allusers, setAllUsers] = useState([]);
     const [allvisitors, setAllVisitors] = useState([]);
     const [purpose, setVisitorPurpose] = useState([]);
-		const [searchResults, setSearchResults] = useState([]);
-		const [searchTitle, setSearchTitle] = useState("");		
+    const [searchResults, setSearchResults] = useState([]);
+    const [searchTitle, setSearchTitle] = useState("");
     const navigate = useNavigate();
 
     const initialFormData = {
@@ -20,16 +20,16 @@ export default function Home() {
         purpose_id: ""
     };
 
-		
+
     const [formData, updateFormData] = React.useState(initialFormData);
 
-		
 
-		useEffect(() => {
+
+    useEffect(() => {
         retrieveAllUsers();
-				retrieveAllPurpose();
-				retrieveAllVisitors();
-		}, []);
+        retrieveAllPurpose();
+        retrieveAllVisitors();
+    }, []);
 
 
     const handleChangeAddVisitor = (e) => {
@@ -38,7 +38,7 @@ export default function Home() {
     };
     const handleChangeSearchVisitor = (e) => {
         const fullnameText = e.target.value;
-				setSearchTitle(fullnameText);
+        setSearchTitle(fullnameText);
     };
 
     const handleSubmitAddVisitor = (e) => {
@@ -56,50 +56,51 @@ export default function Home() {
             });
     }
 
-    
 
-	 const retrieveAllUsers = () =>{
-		authService.getAllUsers()
-		.then(res => { 
-				setAllUsers(res.data.data)
-		})
-		.catch(err => {
-				console.log(err);
-		})
-	 }
 
-	 const retrieveAllPurpose = () => {
-			authService.getVisitorPurpose()
-			.then(res => { 
-					setVisitorPurpose(res.data.data)
-			})
-			.catch(err => {
-					console.log(err);
-			})
-	 }
+    const retrieveAllUsers = () => {
+        authService.getAllUsers()
+            .then(res => {
+                setAllUsers(res.data.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
-		const retrieveAllVisitors = () =>{
-			visitorService.getAllVisitors()
-			.then(res => {
-				setAllVisitors(res.data.data);
-			})
-			.catch(err => {
-				console.log(err);
-			})
-		}
+    const retrieveAllPurpose = () => {
+        authService.getVisitorPurpose()
+            .then(res => {
+                setVisitorPurpose(res.data.data)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
-		const findByFullname = () => {
-			visitorService.findByFullname(searchTitle)
-				.then(response => {
-					console.log(response);
-					setAllVisitors([]);
-					setAllVisitors(response.data.data);
-				})
-				.catch(e => {
-					console.log(e);
-				});
-		};
-      
+    const retrieveAllVisitors = () => {
+        visitorService.getAllVisitors()
+            .then(res => {
+                setAllVisitors(res.data.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const findByFullname = () => {
+        visitorService.findByFullname(searchTitle)
+            .then(response => {
+                //console.log(allvisitors);
+                //console.log(response);
+                setAllVisitors(response.data.data);
+                //console.log(allvisitors);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
     return (
         <div>
             <div className='row mt-5'>
@@ -184,10 +185,10 @@ export default function Home() {
                                                     <div className="form-group">
                                                         <label></label>
                                                         <select onChange={handleChangeAddVisitor} className="form-control" id="user-id" name="user_id">
-																														<option>whom to visit</option>
+                                                            <option>whom to visit</option>
                                                             {allusers.map(user => (
-																															<option value={user.id} key={user.id}>{user.first_name+ " " + user.last_name}</option>
-																														))}
+                                                                <option value={user.id} key={user.id}>{user.first_name + " " + user.last_name}</option>
+                                                            ))}
                                                         </select>
                                                     </div>
                                                     <div className="form-group">
@@ -219,16 +220,16 @@ export default function Home() {
                             </div>*/}
                             <div className='col-md-6 mb-3'>
                                 <div className="input-group mb-3">
-                                   
+
                                     <input onChange={handleChangeSearchVisitor} type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
-																		<div className="input-group-prepend">
+                                    <div className="input-group-prepend">
                                         <button onClick={findByFullname} className="btn btn-primary" id="basic-addon1"><i className="fas fa-search"></i></button>
                                     </div>
                                 </div>
                             </div>
-														<div className='col-md-6 mb-3 text-right'>
-														<button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i className="fas fa-plus"></i> Add Visitor</button>
-														</div>
+                            <div className='col-md-6 mb-3 text-right'>
+                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i className="fas fa-plus"></i> Add Visitor</button>
+                            </div>
                             <div className='col-md-12 mt-3'>
                                 <div className='table-responsive'>
                                     <table className="table table-striped">
@@ -245,22 +246,22 @@ export default function Home() {
                                             </tr>
                                         </thead>
                                         <tbody>
-																					{allvisitors &&
-																						allvisitors.map((visitor,i) => (
-																							<tr><th scope="row">{i + 1}</th>
-                                                <td>{visitor.fullname}</td>
-                                                {/*<td>{visitor.address}</td>*/}
-                                                <td>{visitor.first_name + " " + visitor.last_name}</td>
-                                                {/*<td>{visitor.date_added}</td>*/}
-                                                <td>{visitor.time_in}</td>
-                                                <td>{visitor.time_out}</td>
-                                                <td className='text-right'>
-																									<a type="button" className="btn btn-warning text-white" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt">Sign Out</i></a>
-																								</td>
-                                            </tr>
-																						)
-																						)
-																					}
+                                            {allvisitors &&
+                                                allvisitors.map((visitor, i) => (
+                                                    <tr><th scope="row">{i + 1}</th>
+                                                        <td>{visitor.fullname}</td>
+                                                        {/*<td>{visitor.address}</td>*/}
+                                                        <td>{visitor.first_name + " " + visitor.last_name}</td>
+                                                        {/*<td>{visitor.date_added}</td>*/}
+                                                        <td>{visitor.time_in}</td>
+                                                        <td>{visitor.time_out}</td>
+                                                        <td className='text-right'>
+                                                            <a type="button" className="btn btn-warning text-white" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt">Sign Out</i></a>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                                )
+                                            }
                                         </tbody>
                                     </table>
                                 </div>

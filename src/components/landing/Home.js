@@ -9,6 +9,8 @@ export default function Home() {
     const [allusers, setAllUsers] = useState([]);
     const [allvisitors, setAllVisitors] = useState([]);
     const [purpose, setVisitorPurpose] = useState([]);
+		const [searchResults, setSearchResults] = useState([]);
+		const [searchTitle, setSearchTitle] = useState("");		
     const navigate = useNavigate();
 
     const initialFormData = {
@@ -17,8 +19,11 @@ export default function Home() {
         user_id: "",
         purpose_id: ""
     };
+
 		
     const [formData, updateFormData] = React.useState(initialFormData);
+
+		
 
 		useEffect(() => {
         retrieveAllUsers();
@@ -26,9 +31,14 @@ export default function Home() {
 				retrieveAllVisitors();
 		}, []);
 
+
     const handleChangeAddVisitor = (e) => {
         const { name, value } = e.target;
         updateFormData({ ...formData, [name]: value });
+    };
+    const handleChangeSearchVisitor = (e) => {
+        const fullnameText = e.target.value;
+				setSearchTitle(fullnameText);
     };
 
     const handleSubmitAddVisitor = (e) => {
@@ -77,6 +87,18 @@ export default function Home() {
 				console.log(err);
 			})
 		}
+
+		const findByFullname = () => {
+			visitorService.findByFullname(searchTitle)
+				.then(response => {
+					console.log(response);
+					setAllVisitors([]);
+					setAllVisitors(response.data.data);
+				})
+				.catch(e => {
+					console.log(e);
+				});
+		};
       
     return (
         <div>
@@ -197,10 +219,11 @@ export default function Home() {
                             </div>*/}
                             <div className='col-md-6 mb-3'>
                                 <div className="input-group mb-3">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text" id="basic-addon1"><i className="fas fa-search"></i></span>
+                                   
+                                    <input onChange={handleChangeSearchVisitor} type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
+																		<div className="input-group-prepend">
+                                        <button onClick={findByFullname} className="btn btn-primary" id="basic-addon1"><i className="fas fa-search"></i></button>
                                     </div>
-                                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
                                 </div>
                             </div>
 														<div className='col-md-6 mb-3 text-right'>
@@ -222,7 +245,7 @@ export default function Home() {
                                             </tr>
                                         </thead>
                                         <tbody>
-																					{
+																					{allvisitors &&
 																						allvisitors.map((visitor,i) => (
 																							<tr><th scope="row">{i + 1}</th>
                                                 <td>{visitor.fullname}</td>

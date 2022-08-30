@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../App.css';
 import { Container, Form, Button, Card } from 'react-bootstrap';
 import authService from '../../services/auth/auth.service';
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = (props) => {
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const initialFormData = {
@@ -30,11 +31,11 @@ const Login = (props) => {
         navigate("/home");
         window.location.reload();
       } else {
-        console.log(response);
+        setMessage(response.data.message);
       }
     })
       .catch(err => {
-
+        setMessage(err.message)
       });
   }
 
@@ -60,8 +61,18 @@ const Login = (props) => {
               <Form.Check label='Remember me' />
             </Form.Group>
             <div className='d-grid'>
-              <Button onClick={handleSubmitLogin} variant='danger' size='lg'>login</Button>
+              <Button onClick={handleSubmitLogin} variant='danger' size='lg'
+                style={{ width: "100%" }} >
+                login
+              </Button>
             </div>
+            {message && (
+              <div className="form-group mt-3">
+                <div className="alert alert-danger" role="alert">
+                  {message}
+                </div>
+              </div>
+            )}
           </Form>
         </div>
       </div>

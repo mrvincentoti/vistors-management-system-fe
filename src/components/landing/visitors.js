@@ -35,7 +35,7 @@ export default function Visitors() {
 
 				</div>
         <div className="row">
-					<div className="col-md-9">
+					<div className="col-md-12">
 						<div className="card" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
 						<div className='table-responsive'>
                                     <table className="table table-striped">
@@ -62,6 +62,9 @@ export default function Visitors() {
                                                 <td>{visitor.date_added}</td>
                                                 <td>{visitor.time_in}</td>
                                                 <td>{visitor.time_out}</td>
+												<td className='text-right'>
+                                                            <a type="button" className="btn btn-primary text-white" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt">Sign In</i></a>
+                                                        </td>
                                             </tr>
 																						)
 																						)
@@ -75,7 +78,7 @@ export default function Visitors() {
                                 </div>
 						</div>
 					</div>
-					<div className="col-md-3">
+					{/* <div className="col-md-3">
 						<div className="card" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
 						<div className='table-responsive'>
                                     <table className="table table-striped">
@@ -97,7 +100,7 @@ export default function Visitors() {
 							
 
 						</div>
-					</div>
+					</div> */}
 				</div>
 					
 				{/* <div className="table-responsive col-md-6">

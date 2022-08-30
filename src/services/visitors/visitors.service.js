@@ -17,10 +17,10 @@ const findByFullname = (fullName) => {
     return axios.get("http://localhost:5000/api/visitor/getVisitorByFullname?fullname="+fullName, config);
 }
 
-const  visitorClockout = () =>{
+const  visitorClockout = (visitor) =>{
     const token = Util.getToken();
     const config = { headers: { Authorization: `Bearer ${token}` } }
-    return axios.get("http://localhost:5000/api/visitor/updateVisitorClockout", config);
+    return axios.patch("http://localhost:5000/api/visitor/updateVisitorClockout", visitor, config);
 }
 
 

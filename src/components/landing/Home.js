@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function Home() {
-    const currentUser = authService.getCurrentUser();
     const [allusers, setAllUsers] = useState([]);
     const [allvisitors, setAllVisitors] = useState([]);
     const [purpose, setVisitorPurpose] = useState([]);
-    const [searchResults, setSearchResults] = useState([]);
     const [searchTitle, setSearchTitle] = useState("");
+		const [currentVisitor, setCurrentVisitor] = useState([]);
+		const [currentIndex, setCurrentIndex] = useState(-1);
     const navigate = useNavigate();
 
     const initialFormData = {
@@ -98,18 +98,25 @@ export default function Home() {
             });
     };
 
-    const signOut = () => {
-			visitorService.getAllVisitors()
-            .then(res => {
-                console.log(res.data.data);
-								this.data.forEach(blogs => {
-									console.log(blogs.id);
-								})
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    const clockOut = () => {
+			// console.log(visitor);
+			visitorService.visitorClockout(currentVisitor)
+			.then(response => {
+				//console.log(response);
+				navigate("/home");
+        window.location.reload();
+			})
+			.catch(err => {
+				console.log(err);
+			});
     }
+
+		const setActiveVisitor = (visitor,index) => {
+			console.log(index);
+			setCurrentVisitor(visitor);
+			setCurrentIndex(index);
+		}
+
 
     return (
         <div>
@@ -166,11 +173,11 @@ export default function Home() {
                     <div className="card shadow-lg p-3 bg-white rounded" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
                         <h4 className='mb-4'>Visitors List</h4>
                         <div className='row'>
-                            {/*<div className='col-md-6 col-sm-12 col-xs-12 mb-3'>
-                                <button type="button" className="btn btn-success" style={{ marginRight: "2px" }}><i className="fas fa-sign-in-alt"></i> Sign In</button>
-                                <button type="button" className="btn btn-primary" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt"></i>Sign Out</button>
-                                <button type="button" className="btn btn-danger"><i className="fas fa-trash-alt"></i> Delete</button>
-                            </div>*/}
+                            <div className='col-md-6 col-sm-12 col-xs-12 mb-3'>
+                                {/* <button type="button" className="btn btn-success" style={{ marginRight: "2px" }}><i className="fas fa-sign-in-alt"></i> Sign In</button> */}
+                                <button onClick={clockOut} type="button" className="btn btn-danger" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt"></i>Sign Out</button>
+                                {/* <button type="button" className="btn btn-danger"><i className="fas fa-trash-alt"></i> Delete</button> */}
+                            </div>
                             <div className='col-md-12 col-sm-12 col-xs-12 text-right mb-3'>
                                 <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog" role="document">
@@ -252,22 +259,20 @@ export default function Home() {
                                                 {/*<th scope="col">Date</th>*/}
                                                 <th scope="col">Time In</th>
                                                 <th scope="col">Time Out</th>
-                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {allvisitors &&
-                                                allvisitors.map((visitor, i) => (
-                                                    <tr key={visitor.id}><th scope="row">{i + 1}</th>
+                                                allvisitors.map((visitor, index) => (
+                                                    <tr onClick={(e) => setActiveVisitor(visitor, index)} key={visitor.id}
+																										className={(index  === currentIndex  ? "active" : "")}>
+																												<th scope="row">{index + 1}</th>
                                                         <td>{visitor.fullname}</td>
                                                         {/*<td>{visitor.address}</td>*/}
                                                         <td>{visitor.first_name + " " + visitor.last_name}</td>
                                                         {/*<td>{visitor.date_added}</td>*/}
                                                         <td>{visitor.time_in}</td>
                                                         <td>{visitor.time_out}</td>
-                                                        <td className='text-right'>
-                                                            <a onClick={signOut} type="button" className="btn btn-warning text-white" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt">Sign Out</i></a>
-                                                        </td>
                                                     </tr>
                                                 )
                                                 )

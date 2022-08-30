@@ -91,10 +91,7 @@ export default function Home() {
     const findByFullname = () => {
         visitorService.findByFullname(searchTitle)
             .then(response => {
-                //console.log(allvisitors);
-                //console.log(response);
                 setAllVisitors(response.data.data);
-                //console.log(allvisitors);
             })
             .catch(e => {
                 console.log(e);
@@ -261,7 +258,7 @@ export default function Home() {
                                         <tbody>
                                             {allvisitors &&
                                                 allvisitors.map((visitor, i) => (
-                                                    <tr><th scope="row">{i + 1}</th>
+                                                    <tr key={visitor.id}><th scope="row">{i + 1}</th>
                                                         <td>{visitor.fullname}</td>
                                                         {/*<td>{visitor.address}</td>*/}
                                                         <td>{visitor.first_name + " " + visitor.last_name}</td>

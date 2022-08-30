@@ -37,7 +37,7 @@ export default function Visitors() {
 	return (
 		<div>
 			<div className="card p-3 mb-3 bg-white rounded  form-control-lg card-body d-flex flex-row" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
-				<span style={{ fontWeight: "bold" }}>LAYER 3 VISITORS LIST</span>
+				<span style={{ fontWeight: "bold" }}>VISITORS CLOCK IN HISTORY</span>
 			</div>
 			<div className="row">
 				<div className="col-md-10 offset-md-1">

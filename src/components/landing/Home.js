@@ -101,6 +101,19 @@ export default function Home() {
             });
     };
 
+    const signOut = () => {
+			visitorService.getAllVisitors()
+            .then(res => {
+                console.log(res.data.data);
+								this.data.forEach(blogs => {
+									console.log(blogs.id);
+								})
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     return (
         <div>
             <div className='row mt-5'>
@@ -256,7 +269,7 @@ export default function Home() {
                                                         <td>{visitor.time_in}</td>
                                                         <td>{visitor.time_out}</td>
                                                         <td className='text-right'>
-                                                            <a type="button" className="btn btn-warning text-white" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt">Sign Out</i></a>
+                                                            <a onClick={signOut} type="button" className="btn btn-warning text-white" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt">Sign Out</i></a>
                                                         </td>
                                                     </tr>
                                                 )

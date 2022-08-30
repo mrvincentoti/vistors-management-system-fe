@@ -44,7 +44,7 @@ const App = () => {
                   <a className="nav-link" href="/home">Home <span className="sr-only">(current)</span></a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/Visitors">Visitors</a>
+                  <a className="nav-link" href="/history">History</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#">Staff</a>
@@ -74,7 +74,7 @@ const App = () => {
           <Route exact path={"/home"} element={<Home />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/visitors" element={<Visitors />} />
+          <Route exact path="/history" element={<Visitors />} />
 
         </Routes>
       </div>

@@ -63,6 +63,10 @@ export default function Visitors() {
 									</div>
 								</div>
 							</div>
+							</div>
+							</div>
+							</div>
+							</div>
 							<div className="col-md-12">
 								<div className='table-responsive'>
 									<table className="table table-striped">
@@ -77,7 +81,75 @@ export default function Visitors() {
 												<th scope="col">Time Out</th>
 												<th scope="col"></th>
 											</tr>
+				</div>
+				</div>
+				</div>
+        <div className="row">
+					<div className="col-md-12">
+						<div className="card" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
+						<div className='table-responsive'>
+                                    <table className="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Fullname</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Whom to See</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Time In</th>
+                                                <th scope="col">Time Out</th>
+                                                <th scope="col"></th>
+                                            </tr>
+																						
+                                        </thead>
+																				<tbody>
+																				{
+																						allvisitors.map((visitor,i) => (
+																							<tr><th scope="row">{i + 1}</th>
+                                                <td>{visitor.fullname}</td>
+                                                <td>{visitor.address}</td>
+                                                <td>{visitor.first_name + " " + visitor.last_name}</td>
+                                                <td>{visitor.date_added}</td>
+                                                <td>{visitor.time_in}</td>
+                                                <td>{visitor.time_out}</td>
+												<td className='text-right'>
+                                                            <a type="button" className="btn btn-primary text-white" style={{ marginRight: "2px" }}><i className="fas fa-sign-out-alt">Sign In</i></a>
+                                                        </td>
+                                            </tr>
+																						)
+																						)
+																					}
+																						</tbody>
+                                        <tbody>
+																					
+                           
+                                        </tbody>
+                                    </table>
+                                </div>
+						</div>
+					</div>
+					{/* <div className="col-md-3">
+						<div className="card" style={{ boxShadow: "0 0 15px 0 lightblue" }}>
+						<div className='table-responsive'>
+                                    <table className="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">VISITOR'S DETAILS</th>
 
+                                            </tr>
+                                        </thead>
+																				<tbody>
+																					<td>sdf</td>
+																				</tbody>
+                                        <tbody>
+																					
+                           
+                                        </tbody>
+                                    </table>
+                                </div>
+							
+
+=======
 										</thead>
 										<tbody>
 											{
@@ -98,10 +170,12 @@ export default function Visitors() {
 									</table>
 								</div>
 							</div>
+>>>>>>> ff49e786411fb2d31fbab2b2eb64f66b119cbede
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
+
 	);
 }

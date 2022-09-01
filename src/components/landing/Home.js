@@ -17,7 +17,8 @@ export default function Home() {
         fullname: "",
         address: "",
         user_id: "",
-        purpose_id: ""
+        purpose_id: "",
+        phone_number: ""
     };
 
 
@@ -34,6 +35,7 @@ export default function Home() {
 
     const handleChangeAddVisitor = (e) => {
         const { name, value } = e.target;
+				console.log(value);
         updateFormData({ ...formData, [name]: value });
     };
     const handleChangeSearchVisitor = (e) => {
@@ -55,8 +57,6 @@ export default function Home() {
 
             });
     }
-
-
 
     const retrieveAllUsers = () => {
         authService.getAllUsers()
@@ -113,6 +113,7 @@ export default function Home() {
 
 		const setActiveVisitor = (visitor,index) => {
 			console.log(index);
+			console.log(visitor);
 			setCurrentVisitor(visitor);
 			setCurrentIndex(index);
 		}
@@ -199,6 +200,10 @@ export default function Home() {
                                                         <input onChange={handleChangeAddVisitor} name="address" className="form-control" id="address" placeholder='Address' />
                                                     </div>
 
+																										<div className="form-group">
+                                                        <label></label>
+                                                        <input onChange={handleChangeAddVisitor} name="phone_number" className="form-control" id="phone_number" placeholder='Phone No.' />
+                                                    </div>
                                                     <div className="form-group">
                                                         <label></label>
                                                         <select onChange={handleChangeAddVisitor} className="form-control" id="user-id" name="user_id">
@@ -255,6 +260,7 @@ export default function Home() {
                                                 <th scope="col">#</th>
                                                 <th scope="col">Fullname</th>
                                                 {/*<th scope="col">Company</th>*/}
+																								<th scope="col">Phone</th>
                                                 <th scope="col">Whom to see</th>
                                                 {/*<th scope="col">Date</th>*/}
                                                 <th scope="col">Time In</th>
@@ -269,6 +275,7 @@ export default function Home() {
 																												<th scope="row">{index + 1}</th>
                                                         <td>{visitor.fullname}</td>
                                                         {/*<td>{visitor.address}</td>*/}
+																												<td>{visitor.phone_number}</td>
                                                         <td>{visitor.first_name + " " + visitor.last_name}</td>
                                                         {/*<td>{visitor.date_added}</td>*/}
                                                         <td>{visitor.time_in}</td>

@@ -71,6 +71,7 @@ export default function Visitors() {
 												<th scope="col">#</th>
 												<th scope="col">Fullname</th>
 												<th scope="col">Address</th>
+												<th scope="col">Phone</th>
 												<th scope="col">Whom to See</th>
 												<th scope="col">Date</th>
 												<th scope="col">Time In</th>
@@ -86,6 +87,7 @@ export default function Visitors() {
 														<th scope="row">{i + 1}</th>
 														<td>{visitor.fullname}</td>
 														<td>{visitor.address}</td>
+														<td>{visitor.phone_number}</td>
 														<td>{visitor.first_name + " " + visitor.last_name}</td>
 														<td>{visitor.date_added}</td>
 														<td>{visitor.time_in}</td>

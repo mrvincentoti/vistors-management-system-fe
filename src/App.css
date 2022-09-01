@@ -16,5 +16,5 @@
 }
 
 .active{
-    background: red;
+    border-bottom: 5px solid red;
 }

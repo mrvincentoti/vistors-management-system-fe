@@ -5,12 +5,13 @@ import Home from './components/landing/Home';
 import AuthService from "./services/auth/auth.service";
 import { useNavigate } from "react-router-dom";
 import Profile from "./components/landing/Profile";
-import Visitors from "./components/landing/visitors"
-/*import "bootstrap/dist/css/bootstrap.min.css";*/
+import Visitors from "./components/landing/visitors";
+import Welcome from "./components/welcome/Welcome";
 
 const App = () => {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentPage, setCurrentPage] = useState("");
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -29,10 +30,14 @@ const App = () => {
     navigate("/");
   };
 
+  const sendCurrentPage = (data) => { // the callback. Use a better name
+    setCurrentPage(data);
+  };
+
   return (
     <div className="container-fluid">
       {
-        currentUser && (
+        currentUser && currentPage === "" && (
           <nav className="navbar navbar-expand-lg navbar-light">
             <a className="navbar-brand" href="#" style={{ fontWeight: "bold" }}>L3VMS</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,12 +60,12 @@ const App = () => {
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a className="dropdown-item" href="/Profile">Profile</a>
-                    <a className="dropdown-item" href="#">Sign Out</a>
+                    <a className="dropdown-item" href="/login" onClick={logOut}>Sign Out</a>
                   </div>
                 </li>
                 <li className="nav-item">
                   <a href="/login" className="btn btn-danger" onClick={logOut}>
-                    LogOut
+                    Sign Out
                   </a>
                 </li>
               </ul>
@@ -75,7 +80,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/history" element={<Visitors />} />
-
+          <Route exact path="/welcome" element={<Welcome sendCurrentPage={sendCurrentPage} />} />
         </Routes>
       </div>
       {/* <Login /> */}

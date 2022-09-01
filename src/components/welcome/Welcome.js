@@ -1,10 +1,74 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import authService from "../../services/auth/auth.service";
+import visitorService from "../../services/visitors/visitors.service";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Welcome = ({ sendCurrentPage }) => {
+	const navigate = useNavigate();
+	const [allusers, setAllUsers] = useState([]);
+	const [purpose, setVisitorPurpose] = useState([]);
+
+
+
     useEffect(() => {
+				retrieveAllUsers();
+        retrieveAllPurpose();
         sendCurrentPage("welcome");
     }, []);
+
+		const initialFormData = {
+			fullname: "",
+			address: "",
+			user_id: "",
+			purpose_id: "",
+			phone_number: ""
+	};
+
+
+	const [formData, updateFormData] = React.useState(initialFormData);
+
+	const handleChangeAddVisitor = (e) => {
+		const { name, value } = e.target;
+		console.log(value);
+		updateFormData({ ...formData, [name]: value });
+	};
+	
+	const handleSubmitAddVisitor = (e) => {
+		e.preventDefault()
+		authService.addVisitor(formData).then(response => {
+				if (response.data) {
+						navigate("/welcome");
+						window.location.reload();
+				} else {
+						console.log(response);
+				}
+		})
+				.catch(err => {
+
+				});
+	}
+
+	const retrieveAllUsers = () => {
+		authService.getAllUsers()
+				.then(res => {
+						setAllUsers(res.data.data)
+				})
+				.catch(err => {
+						console.log(err);
+				})
+	}
+
+	const retrieveAllPurpose = () => {
+			authService.getVisitorPurpose()
+					.then(res => {
+							setVisitorPurpose(res.data.data)
+					})
+					.catch(err => {
+							console.log(err);
+					})
+	}
 
     return (
         <div className='p-3 rounded mt-5 mb-5'>
@@ -34,11 +98,69 @@ const Welcome = ({ sendCurrentPage }) => {
                                 <div className='col-md-12 col-sm-12 col-xs-12 mb-5'>
                                     <span style={{ fontWeight: "bold" }}>Alternatively, select from the following options:</span>
                                 </div>
+
+
+																<div className=' text-right mb-3'>
+                                <div className="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-xl" role="document">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="exampleModalLabel">Fill in your details</h5>
+                                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div className="modal-body">
+                                                <form>
+                                                    <div className="form-group">
+                                                        <label></label>
+                                                        <input onChange={handleChangeAddVisitor} name="fullname" className="form-control" id="fullname" placeholder='FullName' />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label></label>
+                                                        <input onChange={handleChangeAddVisitor} name="address" className="form-control" id="address" placeholder='Address' />
+                                                    </div>
+
+																										<div className="form-group">
+                                                        <label></label>
+                                                        <input onChange={handleChangeAddVisitor} name="phone_number" className="form-control" id="phone_number" placeholder='Phone No.' />
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label></label>
+                                                        <select onChange={handleChangeAddVisitor} className="form-control" id="user-id" name="user_id">
+                                                            <option>whom to visit</option>
+                                                            {allusers.map(user => (
+                                                                <option value={user.id} key={user.id}>{user.first_name + " " + user.last_name}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label></label>
+                                                        <select onChange={handleChangeAddVisitor} className="form-control" id="purpose-id" name="purpose_id">
+                                                            <option>Purpose of visit</option>
+                                                            {purpose.map(pur => (
+                                                                <option value={pur.id} key={pur.id}>{pur.purpose}</option>
+                                                            ))}
+                                                        </select>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button onClick={handleSubmitAddVisitor} type="button" className="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                                 <div className='col-md-12 col-sm-12 col-xs-12 mb-2'>
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" style={{ height: "80px" }}>SIGN IN</button>
+                                    <button data-toggle="modal" data-target="#exampleModal" type="button" className="btn btn-primary btn-lg btn-block" style={{ height: "80px" }}>SIGN IN</button>
                                 </div>
                                 <div className='col-md-12 col-sm-12 col-xs-12'>
-                                    <button type="button" class="btn btn-danger btn-lg btn-block" style={{ height: "80px" }}>SIGN OUT</button>
+                                    <button type="button" className="btn btn-danger btn-lg btn-block" style={{ height: "80px" }}>SIGN OUT</button>
                                 </div>
                             </div>
                         </div>

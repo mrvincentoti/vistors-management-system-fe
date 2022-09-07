@@ -289,6 +289,7 @@ export default function Home() {
                                                 {/*<th scope="col">Date</th>*/}
                                                 <th scope="col">Time In</th>
                                                 <th scope="col">Time Out</th>
+                                                <th scope="col">Tag No.</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -304,6 +305,7 @@ export default function Home() {
                                                         {/*<td>{visitor.date_added}</td>*/}
                                                         <td>{visitor.time_in}</td>
                                                         <td>{visitor.time_out}</td>
+                                                        <td>{visitor.tag}</td>
                                                     </tr>
                                                 )
                                                 )

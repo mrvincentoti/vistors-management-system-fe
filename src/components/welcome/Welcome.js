@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import authService from "../../services/auth/auth.service";
 import visitorService from "../../services/visitors/visitors.service";
 import { useNavigate } from "react-router-dom";
+import Select from 'react-select';
 
 
 
@@ -9,8 +10,19 @@ const Welcome = ({ sendCurrentPage }) => {
 	const navigate = useNavigate();
 	const [allusers, setAllUsers] = useState([]);
 	const [purpose, setVisitorPurpose] = useState([]);
+	const [query, setQuery] = useState("");
+	const [data, setData] = useState([]);
+	const [currentId, setCurrentId] = useState([]);
+	const [currentTag, setCurrentTag] = useState([]);
+	const [message, setMessage] = useState("");
 
 
+	useEffect(() => {
+		visitorService.signedInVisitors(query)
+		.then(response => {
+			setData(response.data.data);
+		})
+	}, [query]);
 
     useEffect(() => {
 				retrieveAllUsers();
@@ -29,6 +41,7 @@ const Welcome = ({ sendCurrentPage }) => {
 
 	const [formData, updateFormData] = React.useState(initialFormData);
 
+
 	const handleChangeAddVisitor = (e) => {
 		const { name, value } = e.target;
 		console.log(value);
@@ -41,6 +54,7 @@ const Welcome = ({ sendCurrentPage }) => {
 				if (response.data) {
 						navigate("/welcome");
 						window.location.reload();
+						window.location.reload("/home");
 				} else {
 						console.log(response);
 				}
@@ -69,6 +83,34 @@ const Welcome = ({ sendCurrentPage }) => {
 							console.log(err);
 					})
 	}
+
+	const clockOut = () => {
+		visitorService.clockoutTagNumber(currentId, currentTag)
+		.then(response => {
+			if (response.data.message === 'updated successfully') {
+				navigate("/welcome");
+				window.location.reload();
+				window.location.reload("/home");
+			}else{
+				setMessage(response.data.message);
+			}
+		})
+		.catch(err => {
+			console.log(err);
+		});
+	}
+
+	const visitorId = (id) =>{
+		visitorService.getVisitorByVisitorId(id)
+		.then(response => {
+			setCurrentId(response.data.data[0])
+		})
+	}
+
+	const handleCurrentTag = (e) =>{
+		setCurrentTag(e.target.value)
+	}
+
 
     return (
         <div className='p-3 rounded mt-5 mb-5'>
@@ -99,6 +141,7 @@ const Welcome = ({ sendCurrentPage }) => {
                                     <span style={{ fontWeight: "bold" }}>Alternatively, select from the following options:</span>
                                 </div>
 
+															 {/* Sign-in Modal & Button */}
 
 																<div className=' text-right mb-3'>
                                 <div className="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -152,15 +195,66 @@ const Welcome = ({ sendCurrentPage }) => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-
-
+                               </div>
                                 <div className='col-md-12 col-sm-12 col-xs-12 mb-2'>
                                     <button data-toggle="modal" data-target="#exampleModal" type="button" className="btn btn-primary btn-lg btn-block" style={{ height: "80px" }}>SIGN IN</button>
                                 </div>
+
+
+
+																{/* Sign-out Modal & Button */}
+
+																<div className=' text-right mb-3'>
+                                <div className="modal fade" id="exampleModal1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-xl" role="document">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="exampleModalLabel">Fill in your details</h5>
+                                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div className="modal-body">
+                                                <form>
+                                                    <div className="form-group">
+                                                        <label></label>
+																												<Select
+																													options = {data.map(pur => (
+																														{ label: pur.fullname, value: pur.id }
+																												   ))}
+
+																													 onChange={pur => visitorId(pur.value)}
+																													
+																												/>
+
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label></label>
+                                                        <input onChange={(e)=> {handleCurrentTag(e)}} name="number" className="form-control" id="tag_number" placeholder='Tag No.' />
+                                                    </div>
+                                                    
+                                                </form>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button onClick={clockOut} type="button" className="btn btn-primary">Sign Out</button>
+                                            </div>
+																						{message && (
+																									<div className="form-group mt-3 text-center">
+																										<div className="alert alert-danger" role="alert">
+																											{message}
+																										</div>
+																									</div>
+																								)}
+                                        </div>
+                                    </div>
+                                </div>
+                               </div>
+
+
+
                                 <div className='col-md-12 col-sm-12 col-xs-12'>
-                                    <button type="button" className="btn btn-danger btn-lg btn-block" style={{ height: "80px" }}>SIGN OUT</button>
+                                    <button data-toggle="modal" data-target="#exampleModal1" type="button" className="btn btn-danger btn-lg btn-block" style={{ height: "80px" }}>SIGN OUT</button>
                                 </div>
                             </div>
                         </div>

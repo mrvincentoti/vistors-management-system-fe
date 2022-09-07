@@ -59,7 +59,7 @@ const  VisitorsService = {
     getVisitorsNumber,
     findByFullname,
     visitorClockout,
-    getVisitorsSignOutNumber
+    getVisitorsSignOutNumber,
     signedInVisitors,
     getVisitorByVisitorId,
     clockoutTagNumber   

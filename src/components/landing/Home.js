@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 export default function Home() {
     const [allusers, setAllUsers] = useState([]);
     const [allvisitors, setAllVisitors] = useState([]);
+    const [VisitorsNumber, setVisitorsNumber] = useState([]);
+    const [VisitorsSignOutNumber, setVisitorsSignOutNumber] = useState([]);
     const [purpose, setVisitorPurpose] = useState([]);
     const [searchTitle, setSearchTitle] = useState("");
 		const [currentVisitor, setCurrentVisitor] = useState([]);
@@ -30,6 +32,8 @@ export default function Home() {
         retrieveAllUsers();
         retrieveAllPurpose();
         retrieveAllVisitors();
+        retrievevisitorNumber();
+        retrieveVisitorsSignOutNumber();
     }, []);
 
 
@@ -78,10 +82,29 @@ export default function Home() {
             })
     }
 
+    
     const retrieveAllVisitors = () => {
         visitorService.getAllVisitors()
             .then(res => {
                 setAllVisitors(res.data.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const retrievevisitorNumber = () => {
+        visitorService.getVisitorsNumber()
+            .then(res => {
+                setVisitorsNumber(res.data.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+    const retrieveVisitorsSignOutNumber = () => {
+        visitorService.getVisitorsSignOutNumber()
+            .then(res => {
+                setVisitorsSignOutNumber(res.data.data);
             })
             .catch(err => {
                 console.log(err);
@@ -117,6 +140,7 @@ export default function Home() {
 			setCurrentVisitor(visitor);
 			setCurrentIndex(index);
 		}
+        console.log(VisitorsSignOutNumber);
 
 
     return (
@@ -133,7 +157,7 @@ export default function Home() {
                                             <i className="fas fa-users" style={{ fontSize: "30px" }}></i>
                                         </div>
                                         <div className="col-md-6 text-right">
-                                            <h3>20</h3>
+                                            <h3>{VisitorsNumber.length}</h3>
                                             <span style={{ fontWeight: "bold" }}>Total Visitors</span>
                                         </div>
                                     </div>
@@ -146,7 +170,7 @@ export default function Home() {
                                             <i className="fas fa-sign-in-alt" style={{ fontSize: "30px" }}></i>
                                         </div>
                                         <div className="col-md-6 text-right">
-                                            <h3>20</h3>
+                                            <h3>{VisitorsNumber.length - VisitorsSignOutNumber.length}</h3>
                                             <span style={{ fontWeight: "bold" }}>Signed In</span>
                                         </div>
                                     </div>
@@ -159,8 +183,8 @@ export default function Home() {
                                             <i className="fas fa-truck" style={{ fontSize: "30px" }}></i>
                                         </div>
                                         <div className="col-md-6 text-right">
-                                            <h3>20</h3>
-                                            <span style={{ fontWeight: "bold" }}>Deliveries</span>
+                                            <h3>{VisitorsSignOutNumber.length}</h3>
+                                            <span style={{ fontWeight: "bold" }}>Signed Out</span>
                                         </div>
                                     </div>
                                 </div>

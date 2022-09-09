@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Login from './components/auth/Login';
 import Home from './components/landing/Home';
@@ -39,7 +39,7 @@ const App = () => {
       {
         currentUser && currentPage === "" && (
           <nav className="navbar navbar-expand-lg navbar-light">
-            <a className="navbar-brand" href="#" style={{ fontWeight: "bold" }}>L3VMS</a>
+            <a className="navbar-brand" href="/home" style={{ fontWeight: "bold" }}>L3VMS</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -51,11 +51,11 @@ const App = () => {
                 <li className="nav-item">
                   <a className="nav-link" href="/history">History</a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a className="nav-link" href="#">Staff</a>
-                </li>
+                </li> */}
                 <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a className="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Account
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

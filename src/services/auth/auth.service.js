@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Util from '../../util/common';
 
-const domain = process.env.NODE_ENV !== 'production' ? process.env.REACT_APP_LOCAL_HOST : process.env.REACT_APP_LOCAL_HOST;
+const domain = process.env.NODE_ENV !== 'production' ? process.env.REACT_APP_REMOTE_HOST : process.env.REACT_APP_LOCAL_HOST;
 
 const login = (data) => {
     return axios.post(`${domain}/api/user/login`, data);

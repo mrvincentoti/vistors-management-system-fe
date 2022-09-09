@@ -11,8 +11,8 @@ export default function Home() {
     const [VisitorsSignOutNumber, setVisitorsSignOutNumber] = useState([]);
     const [purpose, setVisitorPurpose] = useState([]);
     const [searchTitle, setSearchTitle] = useState("");
-		const [currentVisitor, setCurrentVisitor] = useState([]);
-		const [currentIndex, setCurrentIndex] = useState(-1);
+    const [currentVisitor, setCurrentVisitor] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(-1);
     const navigate = useNavigate();
 
     const initialFormData = {
@@ -81,7 +81,7 @@ export default function Home() {
             })
     }
 
-    
+
     const retrieveAllVisitors = () => {
         visitorService.getAllVisitors()
             .then(res => {
@@ -121,25 +121,22 @@ export default function Home() {
     };
 
     const clockOut = () => {
-			// console.log(visitor);
-			visitorService.visitorClockout(currentVisitor)
-			.then(response => {
-				//console.log(response);
-				navigate("/home");
-        window.location.reload();
-			})
-			.catch(err => {
-				console.log(err);
-			});
+        // console.log(visitor);
+        visitorService.visitorClockout(currentVisitor)
+            .then(response => {
+                //console.log(response);
+                navigate("/home");
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
-		const setActiveVisitor = (visitor,index) => {
-			console.log(index);
-			console.log(visitor);
-			setCurrentVisitor(visitor);
-			setCurrentIndex(index);
-		}
-        console.log(VisitorsSignOutNumber);
+    const setActiveVisitor = (visitor, index) => {
+        setCurrentVisitor(visitor);
+        setCurrentIndex(index);
+    }
 
 
     return (
@@ -223,7 +220,7 @@ export default function Home() {
                                                         <input onChange={handleChangeAddVisitor} name="address" className="form-control" id="address" placeholder='Address' />
                                                     </div>
 
-																										<div className="form-group">
+                                                    <div className="form-group">
                                                         <label></label>
                                                         <input onChange={handleChangeAddVisitor} name="phone_number" className="form-control" id="phone_number" placeholder='Phone No.' />
                                                     </div>
@@ -283,7 +280,7 @@ export default function Home() {
                                                 <th scope="col">#</th>
                                                 <th scope="col">Fullname</th>
                                                 {/*<th scope="col">Company</th>*/}
-																								<th scope="col">Phone</th>
+                                                <th scope="col">Phone</th>
                                                 <th scope="col">Whom to see</th>
                                                 {/*<th scope="col">Date</th>*/}
                                                 <th scope="col">Time In</th>
@@ -295,11 +292,11 @@ export default function Home() {
                                             {allvisitors &&
                                                 allvisitors.map((visitor, index) => (
                                                     <tr onClick={(e) => setActiveVisitor(visitor, index)} key={visitor.id}
-																										className={(index  === currentIndex  ? "active" : "")}>
-																												<th scope="row">{index + 1}</th>
+                                                        className={(index === currentIndex ? "active" : "")}>
+                                                        <th scope="row">{index + 1}</th>
                                                         <td>{visitor.fullname}</td>
                                                         {/*<td>{visitor.address}</td>*/}
-																												<td>{visitor.phone_number}</td>
+                                                        <td>{visitor.phone_number}</td>
                                                         <td>{visitor.first_name + " " + visitor.last_name}</td>
                                                         {/*<td>{visitor.date_added}</td>*/}
                                                         <td>{visitor.time_in}</td>

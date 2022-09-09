@@ -2,8 +2,10 @@
 import axios from 'axios';
 import Util from '../../util/common';
 
+const domain = process.env.NODE_ENV !== 'production' ? process.env.REACT_APP_LOCAL_HOST : process.env.REACT_APP_LOCAL_HOST;
+
 const login = (data) => {
-    return axios.post("http://localhost:5000/api/user/login", data);
+    return axios.post(`${domain}/api/user/login`, data);
 }
 
 const getCurrentUser = () => {
@@ -11,11 +13,11 @@ const getCurrentUser = () => {
 };
 
 const getAllUsers = () => {
-    return axios.get("http://localhost:5000/api/user/getUsers");
+    return axios.get(`${domain}/api/user/getUsers`);
 }
 
 const getVisitorPurpose = () => {
-    return axios.get("http://localhost:5000/api/visitor/getVisitorPurpose")
+    return axios.get(`${domain}/api/visitor/getVisitorPurpose`)
 }
 
 const logout = () => {
@@ -25,7 +27,7 @@ const logout = () => {
 const addVisitor = (data) => {
     const token = Util.getToken();
     const config = { headers: { Authorization: `Bearer ${token}` } }
-    return axios.post("http://localhost:5000/api/visitor/createVisitors", data, config);
+    return axios.post(`${domain}/api/visitor/createVisitors`, data, config);
 }
 
 
@@ -38,16 +40,3 @@ const AuthService = {
     getVisitorPurpose
 }
 export default AuthService;
-
-//export default new AuthService();
-
-
-
-// const cors = require('cors');
-// const corsOptions ={
-//     origin:'http://localhost:3000', 
-//     credentials:true,            //access-control-allow-credentials:true
-//     optionSuccessStatus:200
-// }
-
-// app.use(cors(corsOptions));

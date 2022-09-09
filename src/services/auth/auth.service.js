@@ -25,10 +25,7 @@ const logout = () => {
 };
 
 const addVisitor = (data) => {
-    console.log(data);
-    const token = Util.getToken();
-    const config = { headers: { Authorization: `Bearer ${token}` } }
-    return axios.post(`${domain}/api/visitor/createVisitors`, data, config);
+    return axios.post(`${domain}/api/visitor/createVisitors`, data);
 }
 
 

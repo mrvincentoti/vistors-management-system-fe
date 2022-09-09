@@ -57,28 +57,28 @@ const Login = (props) => {
             </div>
             <div className="col-md-12 col-xs-12 col-lg-12 text-center">
             <Form>
-            <Form.Group controlId='sign-in-email-address'>
-              <Form.Control onChange={handleChangeLogin} type='email' size='lg' placeholder='Email address' autoComplete='username' className='positon-relative mb-2' />
-            </Form.Group>
-            <Form.Group controlId='sign-in-password' className='mb-3'>
-              <Form.Control onChange={handleChangeLogin} type='password' size='lg' placeholder='Password' autoComplete='current-password' className='positon-relative' />
-            </Form.Group>
-            <Form.Group controlId='remember-me' className='d-flex justify-content-center mb-4'>
-              <Form.Check label='Remember me' />
-            </Form.Group>
-            <div className='d-grid'>
-              <Button onClick={handleSubmitLogin} variant='danger' size='lg'
-                style={{ width: "100%" }} >
-                login
-              </Button>
-            </div>
-            {message && (
-              <div className="form-group mt-3">
-                <div className="alert alert-danger" role="alert">
-                  {message}
+                <Form.Group controlId='sign-in-email-address'>
+                  <Form.Control onChange={handleChangeLogin} type='email' size='lg' placeholder='Email address' autoComplete='username' className='positon-relative mb-2' />
+                </Form.Group>
+                <Form.Group controlId='sign-in-password' className='mb-3'>
+                  <Form.Control onChange={handleChangeLogin} type='password' size='lg' placeholder='Password' autoComplete='current-password' className='positon-relative' />
+                </Form.Group>
+                <Form.Group controlId='remember-me' className='d-flex justify-content-center mb-4'>
+                  <Form.Check label='Remember me' />
+                </Form.Group>
+                <div className='d-grid'>
+                  <Button onClick={handleSubmitLogin} variant='danger' size='lg'
+                    style={{ width: "100%" }} >
+                    login
+                  </Button>
                 </div>
-              </div>
-            )}
+                {message && (
+                  <div className="form-group mt-3">
+                    <div className="alert alert-danger" role="alert">
+                      {message}
+                    </div>
+                  </div>
+                )}
             </Form>
 
             

@@ -44,7 +44,6 @@ const Welcome = ({ sendCurrentPage }) => {
 
 	const handleChangeAddVisitor = (e) => {
 		const { name, value } = e.target;
-		console.log(value);
 		updateFormData({ ...formData, [name]: value });
 	};
 	

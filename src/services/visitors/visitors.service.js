@@ -30,9 +30,7 @@ const findByFullname = (fullName) => {
     return axios.get(`${domain}/api/visitor/getVisitorByFullname?fullname=${fullName}`, config);
 }
 const signedInVisitors = (fullName) => {
-    const token = Util.getToken();
-    const config = { headers: { Authorization: `Bearer ${token}` } }
-    return axios.get(`${domain}/api/visitor/signedInVisitors?fullname=${fullName}`, config);
+    return axios.get(`${domain}/api/visitor/signedInVisitors?fullname=${fullName}`);
 }
 
 const visitorClockout = (visitor) => {

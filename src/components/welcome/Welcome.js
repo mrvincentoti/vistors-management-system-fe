@@ -42,24 +42,23 @@ const Welcome = ({ sendCurrentPage }) => {
     const [formData, updateFormData] = React.useState(initialFormData);
 
 
-    const handleChangeAddVisitor = (e) => {
-        const { name, value } = e.target;
-        console.log(value);
-        updateFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmitAddVisitor = (e) => {
-        e.preventDefault()
-        authService.addVisitor(formData).then(response => {
-            if (response.data) {
-                navigate("/welcome");
-                window.location.reload();
-                window.location.reload("/home");
-            } else {
-                console.log(response);
-            }
-        })
-            .catch(err => {
+	const handleChangeAddVisitor = (e) => {
+		const { name, value } = e.target;
+		updateFormData({ ...formData, [name]: value });
+	};
+	
+	const handleSubmitAddVisitor = (e) => {
+		e.preventDefault()
+		authService.addVisitor(formData).then(response => {
+				if (response.data) {
+						navigate("/welcome");
+						window.location.reload();
+						window.location.reload("/home");
+				} else {
+						console.log(response);
+				}
+		})
+				.catch(err => {
 
             });
     }

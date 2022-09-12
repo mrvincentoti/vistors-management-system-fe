@@ -3,6 +3,7 @@ import authService from "../../services/auth/auth.service";
 import visitorService from "../../services/visitors/visitors.service";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Select from 'react-select';
 
 export default function Home() {
     const [allusers, setAllUsers] = useState([]);
@@ -226,12 +227,11 @@ export default function Home() {
                                                     </div>
                                                     <div className="form-group">
                                                         <label></label>
-                                                        <select onChange={handleChangeAddVisitor} className="form-control" id="user-id" name="user_id">
-                                                            <option>whom to visit</option>
-                                                            {allusers.map(user => (
-                                                                <option value={user.id} key={user.id}>{user.first_name + " " + user.last_name}</option>
-                                                            ))}
-                                                        </select>
+                                                        <Select className='text-left' placeholder={<div>whom to see</div>} onChange={handleChangeAddVisitor}
+																														options={allusers.map(user => (
+																															{ label: user.first_name + " "+ user.last_name, value: user.id }
+																													))}
+																												/>
                                                     </div>
                                                     <div className="form-group">
                                                         <label></label>

@@ -44,6 +44,12 @@ const Welcome = ({ sendCurrentPage }) => {
 
 	const handleChangeAddVisitor = (e) => {
 		const { name, value } = e.target;
+		console.log(name, value);
+		updateFormData({ ...formData, [name]: value });
+	};
+
+	const handleChangeAddVisitor2 = (user) => {
+		const { name, value } = user;
 		updateFormData({ ...formData, [name]: value });
 	};
 	
@@ -106,9 +112,15 @@ const Welcome = ({ sendCurrentPage }) => {
             })
     }
 
+		const searchUserById = (id) => {
+			console.log(id);
+			console.log(formData);
+		}
+
     const handleCurrentTag = (e) => {
         setCurrentTag(e.target.value)
     }
+
 
 
     return (
@@ -174,12 +186,22 @@ const Welcome = ({ sendCurrentPage }) => {
                                                         </div>
                                                         <div className="form-group">
                                                             <label></label>
-                                                            <select onChange={handleChangeAddVisitor} className="form-control" id="user-id" name="user_id">
-                                                                <option>whom to visit</option>
-                                                                {allusers.map(user => (
-                                                                    <option value={user.id} key={user.id}>{user.first_name + " " + user.last_name}</option>
+																															{/* <Select className='form-control text-left' name='user_id' id='user_id' placeholder={<div>whom to see</div>}
+																															<option>Whom to see</option>
+																															{
+																																allusers.map(user => (
+																																	<option value={user.id} key={user.id}>{ user.first_name + " "+ user.last_name }</option>
+																																))
+																															}
+																															/> */}
+																														<Select
+                                                                options={allusers.map(user => (
+                                                                    { label: user.first_name+ " " +user.last_name, value: user.id , name: "user_id"}
                                                                 ))}
-                                                            </select>
+
+                                                                onChange={user => handleChangeAddVisitor2(user)}
+
+                                                            />
                                                         </div>
                                                         <div className="form-group">
                                                             <label></label>

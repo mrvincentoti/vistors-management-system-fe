@@ -47,6 +47,11 @@ export default function Home() {
         setSearchTitle(fullnameText);
     };
 
+		const handleChangeAddVisitor2 = (user) => {
+			const { name, value } = user;
+			updateFormData({ ...formData, [name]: value });
+		};
+
     const handleSubmitAddVisitor = (e) => {
         e.preventDefault()
         authService.addVisitor(formData).then(response => {
@@ -227,11 +232,12 @@ export default function Home() {
                                                     </div>
                                                     <div className="form-group">
                                                         <label></label>
-                                                        <Select className='text-left' placeholder={<div>whom to see</div>} onChange={handleChangeAddVisitor}
-																														options={allusers.map(user => (
-																															{ label: user.first_name + " "+ user.last_name, value: user.id }
-																													))}
-																												/>
+																												<Select placeholder={<div>whom to see</div>} className='text-left'
+                                                                options={allusers.map(user => (
+                                                                    { label: user.first_name+ " " +user.last_name, value: user.id , name: "user_id"}
+                                                                ))}
+                                                                onChange={user => handleChangeAddVisitor2(user)}
+                                                            />
                                                     </div>
                                                     <div className="form-group">
                                                         <label></label>

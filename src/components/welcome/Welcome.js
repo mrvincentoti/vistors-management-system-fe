@@ -112,10 +112,7 @@ const Welcome = ({ sendCurrentPage }) => {
             })
     }
 
-		const searchUserById = (id) => {
-			console.log(id);
-			console.log(formData);
-		}
+		
 
     const handleCurrentTag = (e) => {
         setCurrentTag(e.target.value)
@@ -186,15 +183,8 @@ const Welcome = ({ sendCurrentPage }) => {
                                                         </div>
                                                         <div className="form-group">
                                                             <label></label>
-																															{/* <Select className='form-control text-left' name='user_id' id='user_id' placeholder={<div>whom to see</div>}
-																															<option>Whom to see</option>
-																															{
-																																allusers.map(user => (
-																																	<option value={user.id} key={user.id}>{ user.first_name + " "+ user.last_name }</option>
-																																))
-																															}
-																															/> */}
-																														<Select
+																															
+																														<Select placeholder={<div>whom to see</div>} className='text-left'
                                                                 options={allusers.map(user => (
                                                                     { label: user.first_name+ " " +user.last_name, value: user.id , name: "user_id"}
                                                                 ))}

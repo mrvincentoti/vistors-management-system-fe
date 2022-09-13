@@ -3,6 +3,7 @@ import authService from "../../services/auth/auth.service";
 import visitorService from "../../services/visitors/visitors.service";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Select from 'react-select';
 
 export default function Home() {
     const [allusers, setAllUsers] = useState([]);
@@ -45,6 +46,11 @@ export default function Home() {
         const fullnameText = e.target.value;
         setSearchTitle(fullnameText);
     };
+
+		const handleChangeAddVisitor2 = (user) => {
+			const { name, value } = user;
+			updateFormData({ ...formData, [name]: value });
+		};
 
     const handleSubmitAddVisitor = (e) => {
         e.preventDefault()
@@ -226,12 +232,12 @@ export default function Home() {
                                                     </div>
                                                     <div className="form-group">
                                                         <label></label>
-                                                        <select onChange={handleChangeAddVisitor} className="form-control" id="user-id" name="user_id">
-                                                            <option>whom to visit</option>
-                                                            {allusers.map(user => (
-                                                                <option value={user.id} key={user.id}>{user.first_name + " " + user.last_name}</option>
-                                                            ))}
-                                                        </select>
+																												<Select placeholder={<div>whom to see</div>} className='text-left'
+                                                                options={allusers.map(user => (
+                                                                    { label: user.first_name+ " " +user.last_name, value: user.id , name: "user_id"}
+                                                                ))}
+                                                                onChange={user => handleChangeAddVisitor2(user)}
+                                                            />
                                                     </div>
                                                     <div className="form-group">
                                                         <label></label>
